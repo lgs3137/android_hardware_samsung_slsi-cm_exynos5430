@@ -50,27 +50,24 @@ struct ExynosSensorInfo *createSensorInfo(int camId)
     case SENSOR_NAME_IMX135:
         sensorInfo = new ExynosSensorIMX135();
         break;
-    case SENSOR_NAME_IMX134:
-        sensorInfo = new ExynosSensorIMX134();
-        break;
     case SENSOR_NAME_S5K6A3:
         sensorInfo = new ExynosSensorS5K6A3();
         break;
     case SENSOR_NAME_S5K3H5:
         sensorInfo = new ExynosSensorS5K3H5();
         break;
-    case SENSOR_NAME_S5K4H5:
-        sensorInfo = new ExynosSensorS5K4H5();
-        break;
     case SENSOR_NAME_S5K3H7:
     case SENSOR_NAME_S5K3H7_SUNNY:
         sensorInfo = new ExynosSensorS5K3H7();
         break;
-    case SENSOR_NAME_IMX175:
-        sensorInfo = new ExynosSensorIMX175();
-        break;
     case SENSOR_NAME_S5K8B1:
         sensorInfo = new ExynosSensorS5K8B1();
+        break;
+    case SENSOR_NAME_IMX220:
+        sensorInfo = new ExynosSensorIMX220();
+        break;
+    case SENSOR_NAME_OV5693:
+        sensorInfo = new ExynosSensorOV5693();
         break;
     default:
         ALOGW("WRN(%s[%d]): Unknown sensor, create default sensor", __FUNCTION__, __LINE__);
@@ -368,139 +365,6 @@ ExynosSensorIMX135::ExynosSensorIMX135()
     highSpeedRecording120W = 1008;
     highSpeedRecording120H = 566;
     scalableSensorSupport = true;
-    bnsSupport = false;
-};
-
-ExynosSensorIMX134::ExynosSensorIMX134()
-{
-    maxPreviewW = 1920;
-    maxPreviewH = 1080;
-    maxPictureW = 3264;
-    maxPictureH = 2448;
-    maxVideoW = 1920;
-    maxVideoH = 1080;
-    maxSensorW = 3264;
-    maxSensorH = 2448;
-
-    maxThumbnailW = 512;
-    maxThumbnailH = 384;
-
-    fNumberNum = 22;
-    fNumberDen = 10;
-    focalLengthNum = 420;
-    focalLengthDen = 100;
-    focusDistanceNum = 0;
-    focusDistanceDen = 0;
-    apertureNum = 227;
-    apertureDen = 100;
-    horizontalViewAngle = 51.2f;
-    verticalViewAngle = 39.4f;
-    focalLengthIn35mmLength = 31;
-
-    minFps = 1;
-    maxFps = 30;
-
-    minExposureCompensation = -4;
-    maxExposureCompensation = 4;
-    exposureCompensationStep = 0.5f;
-    maxNumDetectedFaces = 16;
-    maxNumFocusAreas = 2;
-    maxNumMeteringAreas = 32;
-    maxZoomLevel = ZOOM_LEVEL_MAX;
-    maxZoomRatio = 400;
-
-    zoomSupport = true;
-    smoothZoomSupport = false;
-    videoSnapshotSupport = true;
-    videoStabilizationSupport = false;
-    autoWhiteBalanceLockSupport = false;
-    autoExposureLockSupport = true;
-
-    antiBandingList =
-          ANTIBANDING_AUTO
-        | ANTIBANDING_50HZ
-        | ANTIBANDING_60HZ
-        | ANTIBANDING_OFF
-        ;
-
-    effectList =
-          EFFECT_NONE
-        | EFFECT_MONO
-        | EFFECT_NEGATIVE
-        /*| EFFECT_SOLARIZE*/
-        | EFFECT_SEPIA
-        | EFFECT_POSTERIZE
-        /*| EFFECT_WHITEBOARD*/
-        /*| EFFECT_BLACKBOARD*/
-        | EFFECT_AQUA
-        ;
-
-    flashModeList =
-          FLASH_MODE_OFF
-        | FLASH_MODE_AUTO
-        | FLASH_MODE_ON
-        /*| FLASH_MODE_RED_EYE*/
-        | FLASH_MODE_TORCH;
-
-    focusModeList =
-          FOCUS_MODE_AUTO
-        /*| FOCUS_MODE_INFINITY*/
-        | FOCUS_MODE_MACRO
-        /*| FOCUS_MODE_FIXED*/
-        /*| FOCUS_MODE_EDOF*/
-        | FOCUS_MODE_CONTINUOUS_VIDEO
-        | FOCUS_MODE_CONTINUOUS_PICTURE
-        | FOCUS_MODE_TOUCH;
-
-    sceneModeList =
-          SCENE_MODE_AUTO
-        | SCENE_MODE_ACTION
-        | SCENE_MODE_PORTRAIT
-        | SCENE_MODE_LANDSCAPE
-        | SCENE_MODE_NIGHT
-        | SCENE_MODE_NIGHT_PORTRAIT
-        | SCENE_MODE_THEATRE
-        | SCENE_MODE_BEACH
-        | SCENE_MODE_SNOW
-        | SCENE_MODE_SUNSET
-        | SCENE_MODE_STEADYPHOTO
-        | SCENE_MODE_FIREWORKS
-        | SCENE_MODE_SPORTS
-        | SCENE_MODE_PARTY
-        | SCENE_MODE_CANDLELIGHT;
-
-    whiteBalanceList =
-          WHITE_BALANCE_AUTO
-        | WHITE_BALANCE_INCANDESCENT
-        | WHITE_BALANCE_FLUORESCENT
-        /*| WHITE_BALANCE_WARM_FLUORESCENT*/
-        | WHITE_BALANCE_DAYLIGHT
-        | WHITE_BALANCE_CLOUDY_DAYLIGHT
-        /*| WHITE_BALANCE_TWILIGHT*/
-        /*| WHITE_BALANCE_SHADE*/
-        ;
-
-    previewSizeLutMax     = 0;
-    pictureSizeLutMax     = 0;
-    videoSizeLutMax       = 0;
-    previewSizeLut        = NULL;
-    pictureSizeLut        = NULL;
-    videoSizeLut          = NULL;
-    videoSizeLutHighSpeed = NULL;
-    sizeTableSupport      = false;
-
-    /* vendor specifics */
-    /*
-    burstPanoramaW = 3264;
-    burstPanoramaH = 1836;
-    highSpeedRecording60WFHD = 1920;
-    highSpeedRecording60HFHD = 1080;
-    highSpeedRecording60W = 1008;
-    highSpeedRecording60H = 566;
-    highSpeedRecording120W = 1008;
-    highSpeedRecording120H = 566;
-    scalableSensorSupport = true;
-    */
     bnsSupport = false;
 };
 
@@ -1192,150 +1056,6 @@ ExynosSensorS5K3H5::ExynosSensorS5K3H5()
     bnsSupport = false;
 };
 
-ExynosSensorS5K4H5::ExynosSensorS5K4H5()
-{
-    maxPreviewW = 1920;
-    maxPreviewH = 1080;
-    maxPictureW = 3264;
-    maxPictureH = 2448;
-    maxVideoW = 1920;
-    maxVideoH = 1080;
-    maxSensorW = 3264;
-    maxSensorH = 2448;
-
-    maxThumbnailW = 512;
-    maxThumbnailH = 384;
-
-    fNumberNum = 22;
-    fNumberDen = 10;
-    focalLengthNum = 420;
-    focalLengthDen = 100;
-    focusDistanceNum = 0;
-    focusDistanceDen = 0;
-    apertureNum = 227;
-    apertureDen = 100;
-    horizontalViewAngle = 51.2f;
-    verticalViewAngle = 39.4f;
-    focalLengthIn35mmLength = 31;
-
-    minFps = 1;
-    maxFps = 30;
-
-    minExposureCompensation = -4;
-    maxExposureCompensation = 4;
-    exposureCompensationStep = 0.5f;
-    maxNumDetectedFaces = 16;
-    maxNumFocusAreas = 2;
-    maxNumMeteringAreas = 32;
-    maxZoomLevel = ZOOM_LEVEL_MAX;
-    maxZoomRatio = 400;
-
-    zoomSupport = true;
-    smoothZoomSupport = false;
-    videoSnapshotSupport = true;
-    videoStabilizationSupport = false;
-    autoWhiteBalanceLockSupport = false;
-    autoExposureLockSupport = true;
-
-    antiBandingList =
-          ANTIBANDING_AUTO
-        | ANTIBANDING_50HZ
-        | ANTIBANDING_60HZ
-        | ANTIBANDING_OFF
-        ;
-
-    effectList =
-          EFFECT_NONE
-        | EFFECT_MONO
-        | EFFECT_NEGATIVE
-        /*| EFFECT_SOLARIZE*/
-        | EFFECT_SEPIA
-        | EFFECT_POSTERIZE
-        /*| EFFECT_WHITEBOARD*/
-        /*| EFFECT_BLACKBOARD*/
-        | EFFECT_AQUA
-        ;
-
-    flashModeList =
-          FLASH_MODE_OFF
-        | FLASH_MODE_AUTO
-        | FLASH_MODE_ON
-        /*| FLASH_MODE_RED_EYE*/
-        | FLASH_MODE_TORCH;
-
-    focusModeList =
-          FOCUS_MODE_AUTO
-        /*| FOCUS_MODE_INFINITY*/
-        | FOCUS_MODE_MACRO
-        /*| FOCUS_MODE_FIXED*/
-        /*| FOCUS_MODE_EDOF*/
-        | FOCUS_MODE_CONTINUOUS_VIDEO
-        | FOCUS_MODE_CONTINUOUS_PICTURE
-        | FOCUS_MODE_TOUCH;
-
-    sceneModeList =
-          SCENE_MODE_AUTO
-        | SCENE_MODE_ACTION
-        | SCENE_MODE_PORTRAIT
-        | SCENE_MODE_LANDSCAPE
-        | SCENE_MODE_NIGHT
-        | SCENE_MODE_NIGHT_PORTRAIT
-        | SCENE_MODE_THEATRE
-        | SCENE_MODE_BEACH
-        | SCENE_MODE_SNOW
-        | SCENE_MODE_SUNSET
-        | SCENE_MODE_STEADYPHOTO
-        | SCENE_MODE_FIREWORKS
-        | SCENE_MODE_SPORTS
-        | SCENE_MODE_PARTY
-        | SCENE_MODE_CANDLELIGHT;
-
-    whiteBalanceList =
-          WHITE_BALANCE_AUTO
-        | WHITE_BALANCE_INCANDESCENT
-        | WHITE_BALANCE_FLUORESCENT
-        /*| WHITE_BALANCE_WARM_FLUORESCENT*/
-        | WHITE_BALANCE_DAYLIGHT
-        | WHITE_BALANCE_CLOUDY_DAYLIGHT
-        /*| WHITE_BALANCE_TWILIGHT*/
-        /*| WHITE_BALANCE_SHADE*/
-        ;
-
-    /* vendor specifics */
-    /*
-    burstPanoramaW = 3264;
-    burstPanoramaH = 1836;
-    highSpeedRecording60WFHD = 1920;
-    highSpeedRecording60HFHD = 1080;
-    highSpeedRecording60W = 1008;
-    highSpeedRecording60H = 566;
-    highSpeedRecording120W = 1008;
-    highSpeedRecording120H = 566;
-    scalableSensorSupport = true;
-    */
-    bnsSupport = false;
-
-    if (bnsSupport == true) {
-        previewSizeLutMax     = 0;
-        pictureSizeLutMax     = 0;
-        videoSizeLutMax       = 0;
-        previewSizeLut        = NULL;
-        pictureSizeLut        = NULL;
-        videoSizeLut          = NULL;
-        videoSizeLutHighSpeed = NULL;
-        sizeTableSupport      = false;
-    } else {
-        previewSizeLutMax     = sizeof(PREVIEW_SIZE_LUT_4H5) / (sizeof(int) * SIZE_OF_LUT);
-        videoSizeLutMax       = sizeof(VIDEO_SIZE_LUT_4H5)   / (sizeof(int) * SIZE_OF_LUT);
-        pictureSizeLutMax     = sizeof(PICTURE_SIZE_LUT_4H5) / (sizeof(int) * SIZE_OF_LUT);
-        previewSizeLut        = PREVIEW_SIZE_LUT_4H5;
-        videoSizeLut          = VIDEO_SIZE_LUT_4H5;
-        pictureSizeLut        = PICTURE_SIZE_LUT_4H5;
-        videoSizeLutHighSpeed = VIDEO_SIZE_LUT_HIGH_SPEED_4H5;
-        sizeTableSupport      = true;
-    }
-};
-
 ExynosSensorS5K6A3::ExynosSensorS5K6A3()
 {
     maxPreviewW = 1280;
@@ -1471,150 +1191,6 @@ ExynosSensorS5K6A3::ExynosSensorS5K6A3()
     bnsSupport = false;
 };
 
-ExynosSensorIMX175::ExynosSensorIMX175()
-{
-    maxPreviewW = 1920;
-    maxPreviewH = 1080;
-    maxPictureW = 3264;
-    maxPictureH = 2448;
-    maxVideoW = 1920;
-    maxVideoH = 1080;
-    maxSensorW = 3264;
-    maxSensorH = 2448;
-
-    maxThumbnailW = 512;
-    maxThumbnailH = 384;
-
-    fNumberNum = 26;
-    fNumberDen = 10;
-    focalLengthNum = 370;
-    focalLengthDen = 100;
-    focusDistanceNum = 0;
-    focusDistanceDen = 0;
-    apertureNum = 276;
-    apertureDen = 100;
-    horizontalViewAngle = 51.2f;
-    verticalViewAngle = 39.4f;
-    focalLengthIn35mmLength = 31;
-
-    minFps = 1;
-    maxFps = 30;
-
-    minExposureCompensation = -4;
-    maxExposureCompensation = 4;
-    exposureCompensationStep = 0.5f;
-    maxNumDetectedFaces = 16;
-    maxNumFocusAreas = 2;
-    maxNumMeteringAreas = 32;
-    maxZoomLevel = ZOOM_LEVEL_MAX;
-    maxZoomRatio = 400;
-
-    zoomSupport = true;
-    smoothZoomSupport = false;
-    videoSnapshotSupport = true;
-    videoStabilizationSupport = false;
-    autoWhiteBalanceLockSupport = true;
-    autoExposureLockSupport = true;
-
-    antiBandingList =
-        ANTIBANDING_AUTO
-        | ANTIBANDING_50HZ
-        | ANTIBANDING_60HZ
-        | ANTIBANDING_OFF
-        ;
-
-    effectList =
-        EFFECT_NONE
-        | EFFECT_MONO
-        | EFFECT_NEGATIVE
-        /*| EFFECT_SOLARIZE*/
-        | EFFECT_SEPIA
-        | EFFECT_POSTERIZE
-        /*| EFFECT_WHITEBOARD*/
-        /*| EFFECT_BLACKBOARD*/
-        | EFFECT_AQUA
-        ;
-
-    flashModeList =
-        FLASH_MODE_OFF
-        | FLASH_MODE_AUTO
-        | FLASH_MODE_ON
-        /*| FLASH_MODE_RED_EYE*/
-        | FLASH_MODE_TORCH;
-
-    focusModeList =
-        FOCUS_MODE_AUTO
-        /*| FOCUS_MODE_INFINITY*/
-        | FOCUS_MODE_MACRO
-        /*| FOCUS_MODE_FIXED*/
-        /*| FOCUS_MODE_EDOF*/
-        | FOCUS_MODE_CONTINUOUS_VIDEO
-        | FOCUS_MODE_CONTINUOUS_PICTURE
-        | FOCUS_MODE_TOUCH;
-
-    sceneModeList =
-        SCENE_MODE_AUTO
-        | SCENE_MODE_ACTION
-        | SCENE_MODE_PORTRAIT
-        | SCENE_MODE_LANDSCAPE
-        | SCENE_MODE_NIGHT
-        | SCENE_MODE_NIGHT_PORTRAIT
-        | SCENE_MODE_THEATRE
-        | SCENE_MODE_BEACH
-        | SCENE_MODE_SNOW
-        | SCENE_MODE_SUNSET
-        | SCENE_MODE_STEADYPHOTO
-        | SCENE_MODE_FIREWORKS
-        | SCENE_MODE_SPORTS
-        | SCENE_MODE_PARTY
-        | SCENE_MODE_CANDLELIGHT;
-
-    whiteBalanceList =
-        WHITE_BALANCE_AUTO
-        | WHITE_BALANCE_INCANDESCENT
-        | WHITE_BALANCE_FLUORESCENT
-        /*| WHITE_BALANCE_WARM_FLUORESCENT*/
-        | WHITE_BALANCE_DAYLIGHT
-        | WHITE_BALANCE_CLOUDY_DAYLIGHT
-        /*| WHITE_BALANCE_TWILIGHT*/
-        /*| WHITE_BALANCE_SHADE*/
-        ;
-
-    /* vendor specifics */
-    /*
-       burstPanoramaW = 3264;
-       burstPanoramaH = 1836;
-       highSpeedRecording60WFHD = 1920;
-       highSpeedRecording60HFHD = 1080;
-       highSpeedRecording60W = 1008;
-       highSpeedRecording60H = 566;
-       highSpeedRecording120W = 1008;
-       highSpeedRecording120H = 566;
-       scalableSensorSupport = true;
-     */
-    bnsSupport = false;
-
-    if (bnsSupport == true) {
-        previewSizeLutMax     = 0;
-        pictureSizeLutMax     = 0;
-        videoSizeLutMax       = 0;
-        previewSizeLut        = NULL;
-        pictureSizeLut        = NULL;
-        videoSizeLut          = NULL;
-        videoSizeLutHighSpeed = NULL;
-        sizeTableSupport      = false;
-    } else {
-        previewSizeLutMax     = sizeof(PREVIEW_SIZE_LUT_IMX175) / (sizeof(int) * SIZE_OF_LUT);
-        videoSizeLutMax       = sizeof(VIDEO_SIZE_LUT_IMX175)   / (sizeof(int) * SIZE_OF_LUT);
-        pictureSizeLutMax     = sizeof(PICTURE_SIZE_LUT_IMX175) / (sizeof(int) * SIZE_OF_LUT);
-        previewSizeLut        = PREVIEW_SIZE_LUT_IMX175;
-        videoSizeLut          = VIDEO_SIZE_LUT_IMX175;
-        pictureSizeLut        = PICTURE_SIZE_LUT_IMX175;
-        videoSizeLutHighSpeed = VIDEO_SIZE_LUT_HIGH_SPEED_IMX175;
-        sizeTableSupport      = true;
-    }
-};
-
 ExynosSensorS5K8B1::ExynosSensorS5K8B1()
 {
     maxPreviewW = 1920;
@@ -1743,6 +1319,258 @@ ExynosSensorS5K8B1::ExynosSensorS5K8B1()
     highSpeedRecording60H = 566;
     highSpeedRecording120W = 1008;
     highSpeedRecording120H = 566;
+    scalableSensorSupport = true;
+    bnsSupport = false;
+};
+
+ExynosSensorIMX220::ExynosSensorIMX220()
+{
+    maxPreviewW = 3840;
+    maxPreviewH = 2160;
+    maxPictureW = 5248;
+    maxPictureH = 3936;
+    maxVideoW = 3840;
+    maxVideoH = 2160;
+    maxSensorW = 5232;
+    maxSensorH = 3926;
+    maxThumbnailW = 512;
+    maxThumbnailH = 384;
+
+    fNumberNum = 26;
+    fNumberDen = 10;
+    focalLengthNum = 370;
+    focalLengthDen = 100;
+    focusDistanceNum = 0;
+    focusDistanceDen = 0;
+    apertureNum = 276;
+    apertureDen = 100;
+    horizontalViewAngle = 51.2f;
+    verticalViewAngle = 39.4f;
+    focalLengthIn35mmLength = 31;
+
+    minFps = 1;
+    maxFps = 15;
+
+    minExposureCompensation = -4;
+    maxExposureCompensation = 4;
+    exposureCompensationStep = 0.5f;
+    maxNumDetectedFaces = 16;
+    maxNumFocusAreas = 1;
+    maxNumMeteringAreas = 32;
+    maxZoomLevel = ZOOM_LEVEL_MAX;
+    maxZoomRatio = 400;
+
+    zoomSupport = true;
+    smoothZoomSupport = false;
+    videoSnapshotSupport = true;
+    videoStabilizationSupport = true;
+    autoWhiteBalanceLockSupport = true;
+    autoExposureLockSupport = true;
+
+    antiBandingList =
+          ANTIBANDING_AUTO
+        | ANTIBANDING_50HZ
+        | ANTIBANDING_60HZ
+        | ANTIBANDING_OFF
+        ;
+
+    effectList =
+          EFFECT_NONE
+        | EFFECT_MONO
+        | EFFECT_NEGATIVE
+        /*| EFFECT_SOLARIZE*/
+        | EFFECT_SEPIA
+        | EFFECT_POSTERIZE
+        /*| EFFECT_WHITEBOARD*/
+        /*| EFFECT_BLACKBOARD*/
+        | EFFECT_AQUA
+        ;
+
+    flashModeList =
+          FLASH_MODE_OFF
+        | FLASH_MODE_AUTO
+        | FLASH_MODE_ON
+        /*| FLASH_MODE_RED_EYE*/
+        | FLASH_MODE_TORCH
+        ;
+
+    focusModeList =
+        FOCUS_MODE_AUTO
+        | FOCUS_MODE_INFINITY
+        | FOCUS_MODE_MACRO
+        | FOCUS_MODE_FIXED
+        /*| FOCUS_MODE_EDOF*/
+        | FOCUS_MODE_CONTINUOUS_VIDEO
+        | FOCUS_MODE_CONTINUOUS_PICTURE
+        | FOCUS_MODE_TOUCH
+        ;
+
+    sceneModeList =
+          SCENE_MODE_AUTO
+        | SCENE_MODE_ACTION
+        | SCENE_MODE_PORTRAIT
+        | SCENE_MODE_LANDSCAPE
+        | SCENE_MODE_NIGHT
+        | SCENE_MODE_NIGHT_PORTRAIT
+        | SCENE_MODE_THEATRE
+        | SCENE_MODE_BEACH
+        | SCENE_MODE_SNOW
+        | SCENE_MODE_SUNSET
+        | SCENE_MODE_STEADYPHOTO
+        | SCENE_MODE_FIREWORKS
+        | SCENE_MODE_SPORTS
+        | SCENE_MODE_PARTY
+        | SCENE_MODE_CANDLELIGHT;
+
+    whiteBalanceList =
+          WHITE_BALANCE_AUTO
+        | WHITE_BALANCE_INCANDESCENT
+        | WHITE_BALANCE_FLUORESCENT
+        /* WHITE_BALANCE_WARM_FLUORESCENT*/
+        | WHITE_BALANCE_DAYLIGHT
+        | WHITE_BALANCE_CLOUDY_DAYLIGHT
+        /* WHITE_BALANCE_TWILIGHT*/
+        /* WHITE_BALANCE_SHADE*/
+        ;
+
+    previewSizeLutMax     = 0;
+    pictureSizeLutMax     = 0;
+    videoSizeLutMax       = 0;
+    previewSizeLut        = NULL;
+    pictureSizeLut        = NULL;
+    videoSizeLut          = NULL;
+    videoSizeLutHighSpeed = NULL;
+    sizeTableSupport      = false;
+
+    /* vendor specifics */
+    highResolutionCallbackW = 5248;
+    highResolutionCallbackH = 3936;
+    scalableSensorSupport = true;
+    bnsSupport = true;
+};
+
+ExynosSensorOV5693::ExynosSensorOV5693()
+{
+    maxPreviewW = 1920;
+    maxPreviewH = 1080;
+    maxPictureW = 2592;
+    maxPictureH = 1944;
+    maxVideoW = 1920;
+    maxVideoH = 1080;
+    maxSensorW = 2576;
+    maxSensorH = 1934;
+    maxThumbnailW = 512;
+    maxThumbnailH = 384;
+
+    fNumberNum = 26;
+    fNumberDen = 10;
+    focalLengthNum = 370;
+    focalLengthDen = 100;
+    focusDistanceNum = 0;
+    focusDistanceDen = 0;
+    apertureNum = 276;
+    apertureDen = 100;
+    horizontalViewAngle = 51.2f;
+    verticalViewAngle = 39.4f;
+    focalLengthIn35mmLength = 31;
+
+    minFps = 1;
+    maxFps = 30;
+
+    minExposureCompensation = -4;
+    maxExposureCompensation = 4;
+    exposureCompensationStep = 0.5f;
+    maxNumDetectedFaces = 16;
+    maxNumFocusAreas = 1;
+    maxNumMeteringAreas = 32;
+    maxZoomLevel = ZOOM_LEVEL_MAX;
+    maxZoomRatio = 400;
+
+    zoomSupport = true;
+    smoothZoomSupport = false;
+    videoSnapshotSupport = true;
+    videoStabilizationSupport = true;
+    autoWhiteBalanceLockSupport = true;
+    autoExposureLockSupport = true;
+
+    antiBandingList =
+          ANTIBANDING_AUTO
+        | ANTIBANDING_50HZ
+        | ANTIBANDING_60HZ
+        | ANTIBANDING_OFF
+        ;
+
+    effectList =
+          EFFECT_NONE
+        | EFFECT_MONO
+        | EFFECT_NEGATIVE
+        /*| EFFECT_SOLARIZE*/
+        | EFFECT_SEPIA
+        | EFFECT_POSTERIZE
+        /*| EFFECT_WHITEBOARD*/
+        /*| EFFECT_BLACKBOARD*/
+        | EFFECT_AQUA
+        ;
+
+    flashModeList =
+          FLASH_MODE_OFF
+        /*| FLASH_MODE_AUTO*/
+        /*| FLASH_MODE_ON*/
+        /*| FLASH_MODE_RED_EYE*/
+        /*| FLASH_MODE_TORCH*/
+        ;
+
+    focusModeList =
+        FOCUS_MODE_AUTO
+        /*| FOCUS_MODE_INFINITY*/
+        /*| FOCUS_MODE_MACRO*/
+        /*| FOCUS_MODE_FIXED*/
+        /*| FOCUS_MODE_EDOF*/
+        /*| FOCUS_MODE_CONTINUOUS_VIDEO*/
+        /*| FOCUS_MODE_CONTINUOUS_PICTURE*/
+        /*| FOCUS_MODE_TOUCH*/
+        ;
+
+    sceneModeList =
+          SCENE_MODE_AUTO
+        | SCENE_MODE_ACTION
+        | SCENE_MODE_PORTRAIT
+        | SCENE_MODE_LANDSCAPE
+        | SCENE_MODE_NIGHT
+        | SCENE_MODE_NIGHT_PORTRAIT
+        | SCENE_MODE_THEATRE
+        | SCENE_MODE_BEACH
+        | SCENE_MODE_SNOW
+        | SCENE_MODE_SUNSET
+        | SCENE_MODE_STEADYPHOTO
+        | SCENE_MODE_FIREWORKS
+        | SCENE_MODE_SPORTS
+        | SCENE_MODE_PARTY
+        | SCENE_MODE_CANDLELIGHT;
+
+    whiteBalanceList =
+          WHITE_BALANCE_AUTO
+        | WHITE_BALANCE_INCANDESCENT
+        | WHITE_BALANCE_FLUORESCENT
+        /* WHITE_BALANCE_WARM_FLUORESCENT*/
+        | WHITE_BALANCE_DAYLIGHT
+        | WHITE_BALANCE_CLOUDY_DAYLIGHT
+        /* WHITE_BALANCE_TWILIGHT*/
+        /* WHITE_BALANCE_SHADE*/
+        ;
+
+    previewSizeLutMax     = 0;
+    pictureSizeLutMax     = 0;
+    videoSizeLutMax       = 0;
+    previewSizeLut        = NULL;
+    pictureSizeLut        = NULL;
+    videoSizeLut          = NULL;
+    videoSizeLutHighSpeed = NULL;
+    sizeTableSupport      = false;
+
+    /* vendor specifics */
+    highResolutionCallbackW = 2592;
+    highResolutionCallbackH = 1944;
     scalableSensorSupport = true;
     bnsSupport = false;
 };

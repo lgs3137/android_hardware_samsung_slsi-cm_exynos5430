@@ -24,7 +24,8 @@ exynos5430_dirs := \
 	libhwcutilsmodule \
 	libhdmimodule \
 	libhwjpeg \
-	libsecurepath 
+	libsecurepath \
+        libcamera
 
 ifeq ($(BOARD_USES_VIRTUAL_DISPLAY), true)
 exynos5430_dirs += \

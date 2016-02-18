@@ -16,8 +16,6 @@ GLOBAL_INCLUDES := bionic \
 	$(COMP_PATH_MobiCoreDriverMod)/Public \
 	$(COMP_PATH_MobiCore)/inc/TlCm
 
-LOCAL_CXX_STL := libstlport
-
 # Include the Daemon
 include $(MOBICORE_PROJECT_PATH)/MobiCoreDriverLib/Android.mk
 

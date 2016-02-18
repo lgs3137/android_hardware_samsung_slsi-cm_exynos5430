@@ -289,7 +289,7 @@ enum pipeline {
     PIPE_GSC,
     PIPE_GSC_VIDEO,
     PIPE_GSC_PICTURE,
-    PIPE_JPEG,        
+    PIPE_JPEG,
     MAX_PIPE_NUM,
 
     PIPE_FLITE_FRONT            = 100,
@@ -315,23 +315,23 @@ enum pipeline {
 };
 
 enum fimc_is_video_dev_num {
-    FIMC_IS_VIDEO_SS0_NUM               = 100,
-    FIMC_IS_VIDEO_SS1_NUM               = 101,
-    FIMC_IS_VIDEO_SS2_NUM               = 102,
-    FIMC_IS_VIDEO_SS3_NUM               = 103,
-    FIMC_IS_VIDEO_3A0_NUM               = 110,
-    FIMC_IS_VIDEO_3A0C_NUM              = 111,
-    FIMC_IS_VIDEO_3A0P_NUM              = 112,
-    FIMC_IS_VIDEO_3A1_NUM               = 114,
-    FIMC_IS_VIDEO_3A1C_NUM              = 115,
-    FIMC_IS_VIDEO_3A1P_NUM              = 116,
-    FIMC_IS_VIDEO_ISP_NUM               = 130,
-    FIMC_IS_VIDEO_SCC_NUM               = 134,
-    FIMC_IS_VIDEO_SCP_NUM               = 137,
-    FIMC_IS_VIDEO_VDC_NUM               = 140,
-    FIMC_IS_VIDEO_VDO_NUM               = 141,
-    FIMC_IS_VIDEO_FD_NUM                = 146,
-    FIMC_IS_VIDEO_MAX_NUM               = 149,
+    FIMC_IS_VIDEO_SS0_NUM       = 100,
+    FIMC_IS_VIDEO_SS1_NUM       = 101,
+    FIMC_IS_VIDEO_SS2_NUM       = 102,
+    FIMC_IS_VIDEO_SS3_NUM       = 103,
+    FIMC_IS_VIDEO_3A0_NUM       = 110,
+    FIMC_IS_VIDEO_3A0C_NUM      = 111,
+    FIMC_IS_VIDEO_3A0P_NUM      = 112,
+    FIMC_IS_VIDEO_3A1_NUM       = 114,
+    FIMC_IS_VIDEO_3A1C_NUM      = 115,
+    FIMC_IS_VIDEO_3A1P_NUM      = 116,
+    FIMC_IS_VIDEO_ISP_NUM       = 130,
+    FIMC_IS_VIDEO_SCC_NUM       = 134,
+    FIMC_IS_VIDEO_SCP_NUM       = 137,
+    FIMC_IS_VIDEO_VDC_NUM       = 140,
+    FIMC_IS_VIDEO_VDO_NUM       = 141,
+    FIMC_IS_VIDEO_FD_NUM        = 146,
+    FIMC_IS_VIDEO_MAX_NUM       = 149
 };
 
 typedef enum
@@ -351,16 +351,13 @@ typedef enum
     SENSOR_NAME_S5K1P2              = 12,
 
     SENSOR_NAME_IMX135              = 101, // 101 ~ 200 Sony sensors
+    SENSOR_NAME_IMX220              = 105,
 
     SENSOR_NAME_SR261               = 201, // 201 ~ 300 Other vendor sensors
+    SENSOR_NAME_OV5693              = 202,
 
     SENSOR_NAME_END,
     SENSOR_NAME_CUSTOM              = 301,
-/* HACK: Remove this define after Driver commonized */
-    SENSOR_NAME_IMX134,
-    SENSOR_NAME_S5K4H5,
-    SENSOR_NAME_IMX175,
-/* End of HACK */
 }IS_SensorNameEnum;
 
 
@@ -373,10 +370,5 @@ struct addrs {
     unsigned int    bufIndex;
     unsigned int    reserved;
 };
-
-/* for test */
-/* #define SCALABLE_ON */
-/* #define TEST_GED_HIGH_SPEED_RECORDING */
-/* #define TEST_APP_HIGH_SPEED_RECORDING */ /* for ArtCamera */
 
 #endif /* EXYNOS_CAMERA_CONFIG_H__ */

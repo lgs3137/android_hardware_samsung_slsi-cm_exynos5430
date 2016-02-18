@@ -21,16 +21,15 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_PRELINK_MODULE := false
-
 LOCAL_SHARED_LIBRARIES:= libutils libcutils libbinder liblog libcamera_client libhardware
 LOCAL_SHARED_LIBRARIES += libexynosutils libhwjpeg libexynosv4l2 libexynosgscaler libion_exynos libcsc
-LOCAL_SHARED_LIBRARIES += libexpat libstlport
+LOCAL_SHARED_LIBRARIES += libexpat
 LOCAL_SHARED_LIBRARIES += libpower
 
 LOCAL_CFLAGS += -DGAIA_FW_BETA
 LOCAL_CFLAGS += -DMAIN_CAMERA_SENSOR_NAME=$(BOARD_BACK_CAMERA_SENSOR)
 LOCAL_CFLAGS += -DFRONT_CAMERA_SENSOR_NAME=$(BOARD_FRONT_CAMERA_SENSOR)
+#LOCAL_CFLAGS += -DSENSOR_NAME_GET_FROM_FILE
 ifeq ($(BOARD_CAMERA_DISPLAY_WQHD), true)
 	LOCAL_CFLAGS += -DCAMERA_DISPLAY_WQHD
 endif
@@ -41,24 +40,23 @@ LOCAL_CFLAGS += -DFRONT_ROTATION=$(BOARD_FRONT_CAMERA_ROTATION)
 LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/../include \
 	$(LOCAL_PATH)/../libcamera \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/54xx \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/54xx/JpegEncoderForCamera \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/common \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/common/Pipes \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/common/Activities \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/common/Buffers \
+	hardware/samsung_slsi-cm/exynos/libcamera/54xx \
+	hardware/samsung_slsi-cm/exynos/libcamera/54xx/JpegEncoderForCamera \
+	hardware/samsung_slsi-cm/exynos/libcamera/common \
+	hardware/samsung_slsi-cm/exynos/libcamera/common/Pipes \
+	hardware/samsung_slsi-cm/exynos/libcamera/common/Activities \
+	hardware/samsung_slsi-cm/exynos/libcamera/common/Buffers \
 	$(LOCAL_PATH)/../libcamera/Vendor \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/include \
-	$(TOP)/hardware/samsung_slsi-cm/$(TARGET_SOC)/include \
-	$(TOP)/hardware/samsung_slsi-cm/$(TARGET_BOARD_PLATFORM)/include \
-	$(TOP)/hardware/samsung_slsi-cm/$(TARGET_BOARD_PLATFORM)/libcamera \
-	$(TOP)/hardware/libhardware_legacy/include/hardware_legacy \
-	$(TOP)/vendor/samsung/feature/CscFeature/libsecnativefeature \
-	$(TOP)/bionic \
-	$(TOP)/external/expat/lib \
-	$(TOP)/external/stlport/stlport
+	hardware/samsung_slsi-cm/exynos/include \
+	hardware/samsung_slsi-cm/$(TARGET_SOC)/include \
+	hardware/samsung_slsi-cm/$(TARGET_BOARD_PLATFORM)/include \
+	hardware/samsung_slsi-cm/$(TARGET_BOARD_PLATFORM)/libcamera \
+	hardware/libhardware_legacy/include/hardware_legacy \
+	external/expat/lib \
+	system/media/camera/include \
+	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 
-LOCAL_SRC_FILES:= \
+LOCAL_SRC_FILES := \
 	ExynosCameraSensorInfo.cpp \
 	../../exynos/libcamera/common/ExynosCameraFrame.cpp \
 	../../exynos/libcamera/common/ExynosCameraMemory.cpp \
@@ -110,18 +108,20 @@ LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/../include \
 	$(LOCAL_PATH)/../libcamera \
 	$(LOCAL_PATH)/../libcamera/Vendor \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/54xx \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/54xx/JpegEncoderForCamera \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/common \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/common/Pipes \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/common/Activities \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/libcamera/common/Buffers \
-	$(TOP)/hardware/samsung_slsi-cm/exynos/include \
-	$(TOP)/hardware/samsung_slsi-cm/$(TARGET_SOC)/include \
-	$(TOP)/hardware/samsung_slsi-cm/$(TARGET_BOARD_PLATFORM)/include \
-	$(TOP)/hardware/samsung_slsi-cm/$(TARGET_BOARD_PLATFORM)/libcamera \
+	hardware/samsung_slsi-cm/exynos/libcamera/54xx \
+	hardware/samsung_slsi-cm/exynos/libcamera/54xx/JpegEncoderForCamera \
+	hardware/samsung_slsi-cm/exynos/libcamera/common \
+	hardware/samsung_slsi-cm/exynos/libcamera/common/Pipes \
+	hardware/samsung_slsi-cm/exynos/libcamera/common/Activities \
+	hardware/samsung_slsi-cm/exynos/libcamera/common/Buffers \
+	hardware/samsung_slsi-cm/exynos/include \
+	hardware/samsung_slsi-cm/$(TARGET_SOC)/include \
+	hardware/samsung_slsi-cm/$(TARGET_BOARD_PLATFORM)/include \
+	hardware/samsung_slsi-cm/$(TARGET_BOARD_PLATFORM)/libcamera \
 	frameworks/native/include \
-	system/media/camera/include
+	system/media/camera/include \
+	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+
 
 LOCAL_SRC_FILES:= \
 	../../exynos/libcamera/common/ExynosCameraInterface.cpp

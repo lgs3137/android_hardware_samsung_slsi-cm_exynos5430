@@ -1,23 +1,14 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+
 #ifndef __DECON_FB_H__
 #define __DECON_FB_H__
+
+/* S3C_FB_MAX_WIN
+ * Set to the maximum number of windows that any of the supported hardware
+ * can use. Since the platform data uses this for an array size, having it
+ * set to the maximum of any version of the hardware can do is safe.
+ */
+#define S3C_FB_MAX_WIN	(5)
+#define S3C_WIN_UPDATE_IDX      (5)
 
 struct s3c_fb_user_window {
 	int x;
@@ -87,13 +78,6 @@ struct s3c_fb_win_config {
 			int				fence_fd;
 			int				plane_alpha;
 		};
-		struct {
-			int left;
-			int top;
-			int right;
-			int bottom;
-			int enableDSU;
-		};
 	};
 
 	int	x;
@@ -103,11 +87,8 @@ struct s3c_fb_win_config {
 	int orientation;
 };
 
-#define S3C_FB_MAX_WIN (5)
-#define S3C_WIN_UPDATE_IDX (5)
-#define DEV_DECON	6
 struct s3c_fb_win_config_data {
-	int fence;
+	int	fence;
 #ifdef CONFIG_FB_WINDOW_UPDATE
 	struct s3c_fb_win_config config[S3C_FB_MAX_WIN + 1];
 #else
@@ -128,5 +109,5 @@ struct s3c_fb_win_config_data {
 						struct s3c_fb_user_ion_client)
 #define S3CFB_WIN_CONFIG		_IOW('F', 209, \
 						struct s3c_fb_win_config_data)
-#define S3CFB_WIN_PSR_EXIT		_IOW('F', 210, int)
+#define S3CFB_WIN_PSR_EXIT 		_IOW('F', 210, int)
 #endif

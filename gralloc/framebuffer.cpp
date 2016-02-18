@@ -82,7 +82,6 @@ static int fb_post(struct framebuffer_device_t* dev, buffer_handle_t buffer)
 
     private_handle_t const* hnd = reinterpret_cast<private_handle_t const*>(buffer);
     private_module_t* m = reinterpret_cast<private_module_t*>(dev->common.module);
-#if HWC_EXIST
     hwc_callback_queue_t *queue = reinterpret_cast<hwc_callback_queue_t *>(m->queue);
     pthread_mutex_lock(&m->queue_lock);
     if(queue->isEmpty())
@@ -94,27 +93,6 @@ static int fb_post(struct framebuffer_device_t* dev, buffer_handle_t buffer)
         pthread_mutex_unlock(&m->queue_lock);
         entry.callback(entry.data, hnd);
     }
-#else
-    // If we can't do the page_flip, just copy the buffer to the front
-    // FIXME: use copybit HAL instead of memcpy
-    void* fb_vaddr;
-    void* buffer_vaddr;
-
-    m->base.lock(&m->base, m->framebuffer,
-            GRALLOC_USAGE_SW_WRITE_RARELY,
-            0, 0, m->info.xres, m->info.yres,
-            &fb_vaddr);
-
-    m->base.lock(&m->base, buffer,
-            GRALLOC_USAGE_SW_READ_RARELY,
-            0, 0, m->info.xres, m->info.yres,
-            &buffer_vaddr);
-
-    memcpy(fb_vaddr, buffer_vaddr, m->finfo.line_length * m->info.yres);
-
-    m->base.unlock(&m->base, buffer);
-    m->base.unlock(&m->base, m->framebuffer);
-#endif
     return 0;
 }
 
@@ -172,7 +150,9 @@ int init_fb(struct private_module_t* module)
 
     float xdpi = (info.xres * 25.4f) / info.width;
     float ydpi = (info.yres * 25.4f) / info.height;
-    float fps  = refreshRate / 1000.0f;
+    float fps  = refreshRate / (double)1000.0;
+
+    ALOGD("refresh int = %d", refreshRate);
 
     ALOGI("using (id=%s)\n"
           "xres         = %d px\n"
@@ -194,15 +174,6 @@ int init_fb(struct private_module_t* module)
 
     size_t fbSize = roundUpToPageSize(finfo.line_length * info.yres_virtual);
     module->framebuffer = new private_handle_t(dup(fd), fbSize, 0);
-
-    void* vaddr = mmap(0, fbSize, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
-    if (vaddr == MAP_FAILED) {
-        ALOGE("Error mapping the framebuffer (%s)", strerror(errno));
-        close(fd);
-        return -errno;
-    }
-    module->framebuffer->base = vaddr;
-    memset(vaddr, 0, fbSize);
 
     close(fd);
 
